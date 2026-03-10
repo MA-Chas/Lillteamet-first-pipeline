@@ -1,3 +1,5 @@
+# modules/k8s-app/main.tf — Reusable app deployment module
+
 variable "name" {
   description = "Application name"
   type        = string
@@ -59,6 +61,8 @@ variable "labels" {
   type        = map(string)
   default     = {}
 }
+
+# --- Resources ---
 
 resource "kubernetes_deployment" "app" {
   metadata {
@@ -137,6 +141,8 @@ resource "kubernetes_service" "app" {
     }
   }
 }
+
+# --- Outputs ---
 
 output "deployment_name" {
   value = kubernetes_deployment.app.metadata[0].name
